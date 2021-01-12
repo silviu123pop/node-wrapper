@@ -83,7 +83,7 @@ function uploadMaybe(items, endpoint, callback) {
         // data only for the most recent sgv, we need to filter out sgvs we've already sent.
         // Otherwise we'll overwrite existing sgv entries and remove their trend data.
         let newSgvs = filterSgvs(transformed.entries);
-
+        console.log(newSgvs);
         // Nightscout's entries collection upserts based on date, but the devicestatus collection
         // does not do the same for created_at, so we need to de-dupe them here.
         let newDeviceStatuses = filterDeviceStatus(transformed.devicestatus);
@@ -96,9 +96,9 @@ function uploadMaybe(items, endpoint, callback) {
         mmcns.logger.log(`Next check ${Math.round(interval / 1000)}s later (at ${new Date(Date.now() + interval)})`)
 
         uploadMaybe(newSgvs, entriesUrl, function() {
-          uploadMaybe(newDeviceStatuses, devicestatusUrl, function() {
-            setTimeout(requestLoop, interval);
-          });
+        uploadMaybe(newDeviceStatuses, devicestatusUrl, function() {
+         setTimeout(requestLoop, interval);
+         });
         });
       }
     });
