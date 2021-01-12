@@ -18,7 +18,6 @@
     "minimed-connect-to-nightscout": "github:FredMK/minimed-connect-to-nightscout#axios"
   },
   "scripts": {
-    "start": "node run.js",
-    "build": "webpack"
+    "start": "node run.js"
   }
 }
